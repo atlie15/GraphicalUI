@@ -49,7 +49,9 @@ void addConnectionDialog::on_pushButton_confirm_clicked()
     scientist = ui->combo_scientists->currentData().toString().toStdString();
 
     if(linkService.addLink(scientist, computer))
+    {
         this->done(1);
+    }
     else
         qDebug() << "There was an error";
 }
