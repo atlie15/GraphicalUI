@@ -2,6 +2,7 @@
 #define ADDCOMPUTERDIALOG_H
 
 #include <QDialog>
+#include "computerservice.h"
 
 namespace Ui {
 class addComputerDialog;
@@ -15,8 +16,12 @@ public:
     explicit addComputerDialog(QWidget *parent = 0);
     ~addComputerDialog();
 
+private slots:
+    void on_pushButton_add_computer_clicked();
+
 private:
     Ui::addComputerDialog *ui;
+    ComputerService computerService;
 };
 
 #endif // ADDCOMPUTERDIALOG_H

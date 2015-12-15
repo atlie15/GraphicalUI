@@ -64,3 +64,4 @@ void addScientistDialog::on_checkBox_scientist_alive_toggled(bool checked)
     else
         ui->lineEdit_scientist_yearDeath->setReadOnly(false);
 }
+
