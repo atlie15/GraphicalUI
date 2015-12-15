@@ -82,7 +82,7 @@
       <item row="0" column="0">
        <widget class="QPushButton" name="button_add_scientists">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
