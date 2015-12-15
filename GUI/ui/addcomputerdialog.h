@@ -19,6 +19,8 @@ public:
 private slots:
     void on_pushButton_add_computer_clicked();
 
+    void on_radioButton_computer_yes_toggled(bool checked);
+
 private:
     Ui::addComputerDialog *ui;
     ComputerService computerService;

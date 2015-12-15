@@ -41,11 +41,12 @@ void addComputerDialog::on_pushButton_add_computer_clicked()
 
     if(ui->radioButton_computer_yes->isChecked())
     {
-        ui->lineEdit_computer_year_built->setEnabled(true);
+        success = computerService.addComputer(Computer(name.toStdString(), type, built.toInt()));
     }
+    if(ui->radioButton_computer_no->isChecked())
+        success = computerService.addComputer(Computer(name.toStdString(), type));
 
 
-    success = computerService.addComputer(Computer(name.toStdString(), type, built.toInt()));
 
     if(success)
     {
@@ -53,24 +54,14 @@ void addComputerDialog::on_pushButton_add_computer_clicked()
     }
     else
     {
-        //this-done(-1);
+        this->done(-1);
     }
 }
-/*
-if(ui->checkBox_scientist_alive->isChecked())
-    success = scientistService.addScientist(Scientist(name.toStdString(), sex, yearBorn.toInt()));
-else
-    success = scientistService.addScientist(Scientist(name.toStdString(), sex, yearBorn.toInt(), yearDeath.toInt()));
 
-
-    /*
-    if(name.isEmpty())
-    {
-        ui->label_error_scientist_name->setText("<span style = 'color: red'>Name cannot be empty </span>");
-        return;
-    }
-    if(yearBorn.isEmpty())
-    {
-        ui->label_error_yearBorn->setText("<span style = 'color: red'>Year born cannot be empty </span>");
-        return;
-    }*/
+void addComputerDialog::on_radioButton_computer_yes_toggled(bool checked)
+{
+    if(checked)
+        ui->lineEdit_computer_year_built->setEnabled(true);
+    else
+        ui->lineEdit_computer_year_built->setEnabled(false);
+}

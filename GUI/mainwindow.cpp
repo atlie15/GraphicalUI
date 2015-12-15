@@ -22,16 +22,24 @@ MainWindow::~MainWindow()
 
 void MainWindow::displayAllScientists()
 {
-    vector<Scientist> scientists = scientistService.getAllScientists("name", true);
+    vector<Scientist> scientists = scientistService.getAllScientists("id", true);
 
     displayScientists(scientists);
+
+    currentView = 1;
+
+    ui->button_remove->setEnabled(false);
 }
 
 void MainWindow::displayAllComputers()
 {
-    vector<Computer> computers = computerService.getAllComputers("name", true);
+    vector<Computer> computers = computerService.getAllComputers("id", true);
 
     displayComputers(computers);
+
+    currentView = 2;
+
+    ui->button_remove->setEnabled(false);
 }
 
 void MainWindow::displayAllConnections()
@@ -39,23 +47,29 @@ void MainWindow::displayAllConnections()
     vector<Scientist> scientists = scientistService.getAllScientists("name", true);
 
     displayConnections(scientists);
+
+    currentView = 3;
+
+    ui->button_remove->setEnabled(false);
 }
 
 void MainWindow::displayComputers(std::vector<Computer> computers)
 {
     ui->table_current_view->clear();
 
-    ui->table_current_view->setColumnCount(3);
-    for(unsigned int i(0); i < 3; i++)
+    ui->table_current_view->setColumnCount(4);
+    for(unsigned int i(0); i < 4; i++)
         ui->table_current_view->setColumnWidth(i, 100);
 
-    ui->table_current_view->setHorizontalHeaderLabels(QStringList() << "Name" << "Type" << "Year Built");
+    ui->table_current_view->setHorizontalHeaderLabels(QStringList() << "ID" << "Name" << "Type" << "Year Built");
 
     ui->table_current_view->setRowCount(computers.size());
 
     for(unsigned int row(0); row < computers.size(); row++)
     {
         Computer tempComputer = computers.at(row);
+
+        QString id = QString::number(tempComputer.getId());
 
         QString name = QString::fromStdString(tempComputer.getName());
 
@@ -68,9 +82,10 @@ void MainWindow::displayComputers(std::vector<Computer> computers)
             yearBuilt = QString::number(tempComputer.getYearBuilt());
 
 
-        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(name));
-        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(type));
-        ui->table_current_view->setItem(row, 2, new QTableWidgetItem(yearBuilt));
+        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(id));
+        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(name));
+        ui->table_current_view->setItem(row, 2, new QTableWidgetItem(type));
+        ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearBuilt));
     }
 
     currentlyDissplayedComputers = computers;
@@ -105,16 +120,18 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
 {
     ui->table_current_view->clear();
 
-    ui->table_current_view->setColumnCount(4);
-    for(unsigned int i(0); i < 4; i++)
+    ui->table_current_view->setColumnCount(5);
+    for(unsigned int i(0); i < 5; i++)
         ui->table_current_view->setColumnWidth(i, 100);
 
-    ui->table_current_view->setHorizontalHeaderLabels(QStringList() << "Name" << "Gender" << "Year Born" << "Year Died");
+    ui->table_current_view->setHorizontalHeaderLabels(QStringList() << "ID" << "Name" << "Gender" << "Year Born" << "Year Died");
     ui->table_current_view->setRowCount(scientists.size());
 
     for(unsigned int row(0); row < scientists.size(); row++)
     {
         Scientist tempScientist = scientists.at(row);
+
+        QString id = QString::number(tempScientist.getId());
 
         QString name = QString::fromStdString(tempScientist.getName());
 
@@ -132,10 +149,11 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
             yearDied = QString::number(tempScientist.getYearDied());
 
 
-        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(name));
-        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(sex));
-        ui->table_current_view->setItem(row, 2, new QTableWidgetItem(yearBorn));
-        ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearDied));
+        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(id));
+        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(name));
+        ui->table_current_view->setItem(row, 2, new QTableWidgetItem(sex));
+        ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearBorn));
+        ui->table_current_view->setItem(row, 4, new QTableWidgetItem(yearDied));
     }
 
     currentlyDissplayedScientists = scientists;
@@ -143,19 +161,16 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
 
 void MainWindow::on_button_view_computers_clicked()
 {
-    currentView = 2;
     displayAllComputers();
 }
 
 void MainWindow::on_button_view_scientists_clicked()
 {
-    currentView = 1;
     displayAllScientists();
 }
 
 void MainWindow::on_button_view_connections_clicked()
 {
-    currentView = 3;
     displayAllConnections();
 }
 
@@ -165,6 +180,7 @@ void MainWindow::on_button_add_scientists_clicked()
 
     int addScientistReturnValue = addScientist.exec();
 
+    displayAllScientists();
 }
 
 void MainWindow::on_button_add_computers_clicked()
@@ -172,6 +188,8 @@ void MainWindow::on_button_add_computers_clicked()
     addComputerDialog addComputer;
 
     addComputer.exec();
+
+    displayAllComputers();
 }
 
 void MainWindow::on_button_add_connections_clicked()
@@ -179,6 +197,8 @@ void MainWindow::on_button_add_connections_clicked()
     addConnectionDialog addConnection;
 
     addConnection.exec();
+
+    displayAllConnections();
 }
 
 void MainWindow::on_table_current_view_clicked(const QModelIndex &index)
@@ -188,15 +208,58 @@ void MainWindow::on_table_current_view_clicked(const QModelIndex &index)
 
 void MainWindow::on_button_remove_clicked()
 {
-    int selectedScientist = ui->table_current_view->currentIndex().row();
-
-    Scientist currentlySelectedScientist = currentlyDissplayedScientists.at(selectedScientist);
-
-    bool success = scientistService.removeScientist(currentlySelectedScientist);
-
-    if(success)
+    if(currentView == 1)
     {
-        displayAllScientists();
-        ui->button_remove->setEnabled(false);
+        Scientist currentlySelectedScientist;
+
+        int row = ui->table_current_view->currentIndex().row();
+
+        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+
+        for (unsigned int i(0); i < currentlyDissplayedScientists.size(); i++)
+        {
+            int tempID = currentlyDissplayedScientists.at(i).getId();
+
+            if(tempID == id)
+            {
+                currentlySelectedScientist = currentlyDissplayedScientists.at(i);
+                break;
+            }
+        }
+
+        bool success = scientistService.removeScientist(currentlySelectedScientist);
+
+        if(success)
+        {
+            displayAllScientists();
+            ui->button_remove->setEnabled(false);
+        }
     }
+//    if(currentView == 2)
+//    {
+//        Computer currentlySelectedComputer;
+
+//        int row = ui->table_current_view->currentIndex().row();
+
+//        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+
+//        for (unsigned int i(0); i < currentlyDisplayedComputers.size(); i++)
+//        {
+//            int tempID = currentlyDisplayedComputers.at(i).getId();
+
+//            if(tempID == id)
+//            {
+//                currentlySelectedComputer = currentlyDissplayedComputers.at(i);
+//                break;
+//            }
+//        }
+
+//        bool success = computerService.removeComputer(currentlySelectedComputer);
+
+//        if(success)
+//        {
+//            displayAllComputers();
+//            ui->button_remove->setEnabled(false);
+//        }
+//    }
 }
