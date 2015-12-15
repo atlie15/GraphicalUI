@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     displayAllScientists();
+    currentView = 1;
 }
 
 MainWindow::~MainWindow()
@@ -134,20 +135,25 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
         ui->table_current_view->setItem(row, 2, new QTableWidgetItem(yearBorn));
         ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearDied));
     }
+
+    currentlyDissplayedScientists = scientists;
 }
 
 void MainWindow::on_button_view_computers_clicked()
 {
+    currentView = 2;
     displayAllComputers();
 }
 
 void MainWindow::on_button_view_scientists_clicked()
 {
+    currentView = 1;
     displayAllScientists();
 }
 
 void MainWindow::on_button_view_connections_clicked()
 {
+    currentView = 3;
     displayAllConnections();
 }
 
@@ -171,4 +177,24 @@ void MainWindow::on_button_add_connections_clicked()
     addConnectionDialog addConnection;
 
     addConnection.exec();
+}
+
+void MainWindow::on_table_current_view_clicked(const QModelIndex &index)
+{
+    ui->button_remove->setEnabled(true);
+}
+
+void MainWindow::on_button_remove_clicked()
+{
+    int selectedScientist = ui->table_current_view->currentIndex().row();
+
+    Scientist currentlySelectedScientist = currentlyDissplayedScientists.at(selectedScientist);
+
+    bool success = scientistService.removeScientist(currentlySelectedScientist);
+
+    if(success)
+    {
+        displayAllScientists();
+        ui->button_remove->setEnabled(false);
+    }
 }

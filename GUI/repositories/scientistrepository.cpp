@@ -104,6 +104,34 @@ bool ScientistRepository::addScientist(Scientist scientist)
     return true;
 }
 
+bool ScientistRepository::removeScientist(Scientist scientist)
+{
+    db.open();
+
+    if (!db.isOpen())
+    {
+        return false;
+    }
+
+    QSqlQuery query(db);
+
+    stringstream sqlQuery;
+    sqlQuery << "DELETE FROM Scientists "
+                "WHERE name='" << scientist.getName()
+             << "' AND sex='" << scientist.getSex()
+             << "' AND yearBorn='" << scientist.getYearBorn()
+             << "' AND yearDied='" << scientist.getYearDied() << "'";
+
+    if (!query.exec(QString::fromStdString(sqlQuery.str())))
+    {
+        return false;
+    }
+
+    db.close();
+
+    return true;
+}
+
 std::vector<Computer> ScientistRepository::queryComputersByScientist(Scientist scientist)
 {
     vector<Computer> computers;

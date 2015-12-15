@@ -31,6 +31,10 @@ private slots:
 
     void on_button_add_connections_clicked();
 
+    void on_table_current_view_clicked(const QModelIndex &index);
+
+    void on_button_remove_clicked();
+
 private:
     void displayAllScientists();
     void displayAllComputers();
@@ -39,8 +43,10 @@ private:
     void displayComputers(std::vector<Computer> computers);
     void displayConnections(std::vector<Scientist> scientists);
     Ui::MainWindow *ui;
+    int currentView;
     ComputerService computerService;
     ScientistService scientistService;
+    std::vector<Scientist> currentlyDissplayedScientists;
 };
 
 #endif // MAINWINDOW_H
