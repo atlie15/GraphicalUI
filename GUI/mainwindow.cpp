@@ -30,6 +30,7 @@ void MainWindow::displayAllScientists()
     currentView = 1;
 
     ui->button_remove->setEnabled(false);
+    ui->lineEdit_search->setText("");
 }
 
 void MainWindow::displayAllComputers()
@@ -41,6 +42,7 @@ void MainWindow::displayAllComputers()
     currentView = 2;
 
     ui->button_remove->setEnabled(false);
+    ui->lineEdit_search->setText("");
 }
 
 void MainWindow::displayAllConnections()
@@ -52,6 +54,7 @@ void MainWindow::displayAllConnections()
     currentView = 3;
 
     ui->button_remove->setEnabled(false);
+    ui->lineEdit_search->setText("");
 }
 
 void MainWindow::displayComputers(std::vector<Computer> computers)
@@ -309,5 +312,21 @@ void MainWindow::on_button_remove_clicked()
                 ui->button_remove->setEnabled(false);
             }
         }
+    }
+}
+
+void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
+{
+    string userInput = ui->lineEdit_search->text().toStdString();
+
+    if(currentView == 1)
+    {
+        vector<Scientist> scientists = scientistService.searchForScientists(userInput);
+        displayScientists(scientists);
+    }
+    if(currentView == 2)
+    {
+        vector<Computer> computers = computerService.searchForComputers(userInput);
+        displayComputers(computers);
     }
 }
