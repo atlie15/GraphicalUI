@@ -53,7 +53,6 @@ void addScientistDialog::on_Button_add_scientist_clicked()
     else
     {
         this->done(-1);
-        //error
     }
 }
 

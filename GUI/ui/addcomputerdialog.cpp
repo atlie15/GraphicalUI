@@ -46,8 +46,6 @@ void addComputerDialog::on_pushButton_add_computer_clicked()
     if(ui->radioButton_computer_no->isChecked())
         success = computerService.addComputer(Computer(name.toStdString(), type));
 
-
-
     if(success)
     {
         this->done(0);

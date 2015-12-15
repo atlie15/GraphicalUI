@@ -3,6 +3,7 @@
 #include "addscientistdialog.h"
 #include "addcomputerdialog.h"
 #include "addconnectiondialog.h"
+#include "QMessageBox"
 
 using namespace std;
 
@@ -184,18 +185,36 @@ void MainWindow::on_button_add_scientists_clicked()
 {
     addScientistDialog addScientist;
 
-    addScientist.exec();
+    int addScientistReturn = addScientist.exec();
 
     displayAllScientists();
+
+    if(addScientistReturn == 0)
+    {
+        ui->statusBar->showMessage("Successfully added Scientist", 5000);
+    }
+    else
+    {
+        ui->statusBar->showMessage("An error has occurred, please try again", 5000);
+    }
 }
 
 void MainWindow::on_button_add_computers_clicked()
 {
     addComputerDialog addComputer;
 
-    addComputer.exec();
+    int addComputerReturn = addComputer.exec();
 
     displayAllComputers();
+
+    if(addComputerReturn == 0)
+    {
+        ui->statusBar->showMessage("Successfully added Computer", 5000);
+    }
+    else
+    {
+        ui->statusBar->showMessage("An error has occurred, please try again", 5000);
+    }
 }
 
 void MainWindow::on_button_add_connections_clicked()
@@ -214,58 +233,66 @@ void MainWindow::on_table_current_view_clicked()
 
 void MainWindow::on_button_remove_clicked()
 {
-    if(currentView == 1)
+    int row = ui->table_current_view->currentIndex().row();
+    QString name = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,1)).toString();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Remove", "Are you sure you want to remove: " + name
+                                  + " from database?", QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes)
     {
-        Scientist currentlySelectedScientist;
-
-        int row = ui->table_current_view->currentIndex().row();
-
-        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
-
-        for (unsigned int i(0); i < currentlyDissplayedScientists.size(); i++)
+        if(currentView == 1)
         {
-            int tempID = currentlyDissplayedScientists.at(i).getId();
+            Scientist currentlySelectedScientist;
 
-            if(tempID == id)
+            int row = ui->table_current_view->currentIndex().row();
+
+            int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+
+            for (unsigned int i(0); i < currentlyDissplayedScientists.size(); i++)
             {
-                currentlySelectedScientist = currentlyDissplayedScientists.at(i);
-                break;
+                int tempID = currentlyDissplayedScientists.at(i).getId();
+
+                if(tempID == id)
+                {
+                    currentlySelectedScientist = currentlyDissplayedScientists.at(i);
+                    break;
+                }
+            }
+
+            bool success = scientistService.removeScientist(currentlySelectedScientist);
+
+            if(success)
+            {
+                displayAllScientists();
+                ui->button_remove->setEnabled(false);
             }
         }
-
-        bool success = scientistService.removeScientist(currentlySelectedScientist);
-
-        if(success)
+        if(currentView == 2)
         {
-            displayAllScientists();
-            ui->button_remove->setEnabled(false);
-        }
-    }
-    if(currentView == 2)
-    {
-        Computer currentlySelectedComputer;
+            Computer currentlySelectedComputer;
 
-        int row = ui->table_current_view->currentIndex().row();
+            int row = ui->table_current_view->currentIndex().row();
 
-        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+            int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
 
-        for (unsigned int i(0); i < currentlyDissplayedComputers.size(); i++)
-        {
-            int tempID = currentlyDissplayedComputers.at(i).getId();
-
-            if(tempID == id)
+            for (unsigned int i(0); i < currentlyDissplayedComputers.size(); i++)
             {
-                currentlySelectedComputer = currentlyDissplayedComputers.at(i);
-                break;
+                int tempID = currentlyDissplayedComputers.at(i).getId();
+
+                if(tempID == id)
+                {
+                    currentlySelectedComputer = currentlyDissplayedComputers.at(i);
+                    break;
+                }
             }
-        }
 
-        bool success = computerService.removeComputer(currentlySelectedComputer);
+            bool success = computerService.removeComputer(currentlySelectedComputer);
 
-        if(success)
-        {
-            displayAllComputers();
-            ui->button_remove->setEnabled(false);
+            if(success)
+            {
+                displayAllComputers();
+                ui->button_remove->setEnabled(false);
+            }
         }
     }
 }
