@@ -37,6 +37,7 @@ private slots:
 
     void on_lineEdit_search_textChanged();
 
+
 private:
     void displayAllScientists();
     void displayAllComputers();

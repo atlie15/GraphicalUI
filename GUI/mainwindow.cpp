@@ -340,3 +340,4 @@ void MainWindow::on_lineEdit_search_textChanged()
         displayComputers(computers);
     }
 }
+
