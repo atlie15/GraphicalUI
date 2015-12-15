@@ -74,3 +74,8 @@ void addScientistDialog::on_checkBox_scientist_alive_toggled(bool checked)
         ui->lineEdit_scientist_yearDeath->setEnabled(true);
 }
 
+
+void addScientistDialog::on_pushButton_return_to_main_menu_clicked()
+{
+    this->done(0);
+}

@@ -21,6 +21,8 @@ private slots:
 
     void on_checkBox_scientist_alive_toggled(bool checked);
 
+    void on_pushButton_return_to_main_menu_clicked();
+
 private:
     Ui::addScientistDialog *ui;
     ScientistService scientistService;

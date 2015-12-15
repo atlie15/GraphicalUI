@@ -123,17 +123,34 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="Button_add_scientist">
-     <property name="text">
-      <string>Add scientist</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QPushButton" name="pushButton_return_to_main_menu">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons.qrc">
+         <normaloff>:/icons/icons/Remove.png</normaloff>:/icons/icons/Remove.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Button_add_scientist">
+       <property name="text">
+        <string>Add scientist</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>lineEdit_scientist_yearDeath</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
