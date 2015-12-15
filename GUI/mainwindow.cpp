@@ -207,13 +207,13 @@ void MainWindow::on_button_add_scientists_clicked()
 
     int addScientistReturn = addScientist.exec();
 
-    displayAllScientists();
-
-    qDebug() << addScientistReturn;
     if(addScientistReturn == 0)
         ui->statusBar->showMessage("Add scientist closed", 5000);
     else if(addScientistReturn == 1)
+    {
         ui->statusBar->showMessage("Successfully added a Scientist", 5000);
+        displayAllScientists();
+    }
     else
         ui->statusBar->showMessage("An error has occurred, please try again", 5000);
 
@@ -225,12 +225,13 @@ void MainWindow::on_button_add_computers_clicked()
 
     int addComputerReturn = addComputer.exec();
 
-    displayAllComputers();
-
     if(addComputerReturn == 0)
         ui->statusBar->showMessage("Add computer closed", 5000);
     else if(addComputerReturn == 1)
+    {
         ui->statusBar->showMessage("Successfully added a Computer", 5000);
+        displayAllComputers();
+    }
     else
         ui->statusBar->showMessage("An error has occurred, please try again", 5000);
 }
@@ -239,9 +240,17 @@ void MainWindow::on_button_add_connections_clicked()
 {
     addConnectionDialog addConnection;
 
-    addConnection.exec();
+    int addConnectionReturn = addConnection.exec();
 
-    displayAllConnections();
+    if(addConnectionReturn == 0)
+        ui->statusBar->showMessage("Add connection closed", 5000);
+    else if(addConnectionReturn == 1)
+    {
+        ui->statusBar->showMessage("Successfully added a Connection", 5000);
+        displayAllConnections();
+    }
+    else
+        ui->statusBar->showMessage("Could not make a connection, please try again", 5000);
 }
 
 void MainWindow::on_table_current_view_clicked()

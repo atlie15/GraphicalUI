@@ -53,7 +53,7 @@ void addConnectionDialog::on_pushButton_confirm_clicked()
         this->done(1);
     }
     else
-        qDebug() << "There was an error";
+        this->done(-1);
 }
 
 void addConnectionDialog::on_pushButton_cancel_clicked()
