@@ -91,14 +91,29 @@
     <widget class="QLineEdit" name="lineEdit_scientist_yearBorn"/>
    </item>
    <item>
-    <widget class="QLabel" name="label_scientist_yearDeath">
-     <property name="text">
-      <string>Year of death</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_scientist_yearDeath">
+       <property name="text">
+        <string>Year of death</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_scientist_alive">
+       <property name="text">
+        <string>Alive</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit_scientist_yearDeath"/>
+    <widget class="QLineEdit" name="lineEdit_scientist_yearDeath">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="Button_add_scientist">
