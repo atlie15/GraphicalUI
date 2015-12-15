@@ -97,6 +97,33 @@ bool ComputerRepository::addComputer(Computer computer)
     return true;
 }
 
+bool ComputerRepository::removeComputer(Computer computer)
+{
+    db.open();
+
+    if (!db.isOpen())
+    {
+        return false;
+    }
+
+    QSqlQuery query(db);
+
+    stringstream sqlQuery;
+    sqlQuery << "DELETE FROM Computers "
+                "WHERE name='" << computer.getName()
+             << "' AND type='" << computer.getType()
+             << "' AND yearBuilt='" << computer.getYearBuilt() << "'";
+
+    if (!query.exec(QString::fromStdString(sqlQuery.str())))
+    {
+        return false;
+    }
+
+    db.close();
+
+    return true;
+    }
+
 std::vector<Scientist> ComputerRepository::queryScientistsByComputer(Computer computer)
 {
     vector<Scientist> scientists;

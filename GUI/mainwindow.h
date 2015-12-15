@@ -47,6 +47,7 @@ private:
     ComputerService computerService;
     ScientistService scientistService;
     std::vector<Scientist> currentlyDissplayedScientists;
+    std::vector<Computer> currentlyDissplayedComputers;
 };
 
 #endif // MAINWINDOW_H

@@ -72,6 +72,8 @@ void MainWindow::displayComputers(std::vector<Computer> computers)
         ui->table_current_view->setItem(row, 1, new QTableWidgetItem(type));
         ui->table_current_view->setItem(row, 2, new QTableWidgetItem(yearBuilt));
     }
+
+    currentlyDissplayedComputers = computers;
 }
 
 void MainWindow::displayConnections(std::vector<Scientist> scientists)
