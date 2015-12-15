@@ -1,17 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>addConnectionDialog</class>
  <widget class="QDialog" name="addConnectionDialog">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>300</width>
+    <height>120</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Connect Scientist to a Computer</string>
   </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetFixedSize</enum>
+   </property>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_scientist">
+     <property name="text">
+      <string>Scientist</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="combo_scientists"/>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_computer">
+     <property name="text">
+      <string>Computer</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QComboBox" name="combo_computers"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QPushButton" name="pushButton_confirm">
+     <property name="text">
+      <string>Confirm</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QPushButton" name="pushButton_cancel">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
