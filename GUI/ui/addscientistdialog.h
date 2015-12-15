@@ -19,6 +19,8 @@ public:
 private slots:
     void on_Button_add_scientist_clicked();
 
+    void on_checkBox_scientist_alive_toggled(bool checked);
+
 private:
     Ui::addScientistDialog *ui;
     ScientistService scientistService;

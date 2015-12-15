@@ -1,6 +1,6 @@
 #include "addscientistdialog.h"
 #include "ui_addscientistdialog.h"
-
+#include "utilities/utils.h"
 
 addScientistDialog::addScientistDialog(QWidget *parent) :
     QDialog(parent),
@@ -17,6 +17,7 @@ addScientistDialog::~addScientistDialog()
 void addScientistDialog::on_Button_add_scientist_clicked()
 {
     QString name = ui->lineEdit_scientist_name->text();
+    sexType sex;
     QString yearBorn = ui->lineEdit_scientist_yearBorn->text();
     QString yearDeath = ui->lineEdit_scientist_yearDeath->text();
     bool success = false;
@@ -33,12 +34,17 @@ void addScientistDialog::on_Button_add_scientist_clicked()
     }
     if(ui->radioButton_scientist_female->isChecked())
     {
-        success = scientistService.addScientist(Scientist(name.toStdString(), female, yearBorn.toInt(), yearDeath.toInt()));
+        sex = female;
     }
     if(ui->radioButton_scientist_male->isChecked())
     {
-        success = scientistService.addScientist(Scientist(name.toStdString(), male, yearBorn.toInt(), yearDeath.toInt()));
+        sex = male;
     }
+
+    if(ui->checkBox_scientist_alive->isChecked())
+        success = scientistService.addScientist(Scientist(name.toStdString(), sex, yearBorn.toInt()));
+    else
+        success = scientistService.addScientist(Scientist(name.toStdString(), sex, yearBorn.toInt(), yearDeath.toInt()));
 
     if(success)
     {
@@ -49,4 +55,12 @@ void addScientistDialog::on_Button_add_scientist_clicked()
         this->done(-1);
         //error
     }
+}
+
+void addScientistDialog::on_checkBox_scientist_alive_toggled(bool checked)
+{
+    if(checked)
+        ui->lineEdit_scientist_yearDeath->setReadOnly(true);
+    else
+        ui->lineEdit_scientist_yearDeath->setReadOnly(false);
 }
