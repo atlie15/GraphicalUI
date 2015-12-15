@@ -58,5 +58,5 @@ void addConnectionDialog::on_pushButton_confirm_clicked()
 
 void addConnectionDialog::on_pushButton_cancel_clicked()
 {
-    this->done(1);
+    this->done(0);
 }

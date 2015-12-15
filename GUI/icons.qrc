@@ -5,5 +5,6 @@
         <file>icons/Remove.png</file>
         <file>icons/view.png</file>
         <file>icons/check.png</file>
+        <file>icons/Edit.png</file>
     </qresource>
 </RCC>

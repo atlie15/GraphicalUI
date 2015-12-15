@@ -30,33 +30,54 @@
       <item row="1" column="2">
        <widget class="QPushButton" name="button_view_connections">
         <property name="text">
-         <string>View Connections</string>
+         <string>View
+Connections</string>
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
           <normaloff>:/icons/icons/view.png</normaloff>:/icons/icons/view.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="button_add_computers">
         <property name="text">
-         <string>Add Computers</string>
+         <string>Add
+Computers</string>
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
           <normaloff>:/icons/icons/Add.png</normaloff>:/icons/icons/Add.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="button_add_connections">
         <property name="text">
-         <string>Add Connections</string>
+         <string>Add
+Connections</string>
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
           <normaloff>:/icons/icons/Add.png</normaloff>:/icons/icons/Add.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -72,33 +93,54 @@
          <bool>false</bool>
         </property>
         <property name="text">
-         <string>Add Scientists</string>
+         <string>Add
+Scientists</string>
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
           <normaloff>:/icons/icons/Add.png</normaloff>:/icons/icons/Add.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="button_view_computers">
         <property name="text">
-         <string>View Computers</string>
+         <string>View
+Computers</string>
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
           <normaloff>:/icons/icons/view.png</normaloff>:/icons/icons/view.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="button_view_scientists">
         <property name="text">
-         <string>View Scientists</string>
+         <string>View
+Scientists</string>
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
           <normaloff>:/icons/icons/view.png</normaloff>:/icons/icons/view.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -142,12 +184,44 @@
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="text">
          <string>Remove</string>
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
           <normaloff>:/icons/icons/Remove.png</normaloff>:/icons/icons/Remove.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button_edit">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="text">
+         <string>Edit</string>
+        </property>
+        <property name="icon">
+         <iconset resource="icons.qrc">
+          <normaloff>:/icons/icons/Edit.png</normaloff>:/icons/icons/Edit.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>

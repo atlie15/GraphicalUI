@@ -31,6 +31,7 @@ void MainWindow::displayAllScientists()
     currentView = 1;
 
     ui->button_remove->setEnabled(false);
+    ui->button_edit->setEnabled(false);
     ui->lineEdit_search->setText("");
 }
 
@@ -43,6 +44,7 @@ void MainWindow::displayAllComputers()
     currentView = 2;
 
     ui->button_remove->setEnabled(false);
+    ui->button_edit->setEnabled(false);
     ui->lineEdit_search->setText("");
 }
 
@@ -55,6 +57,7 @@ void MainWindow::displayAllConnections()
     currentView = 3;
 
     ui->button_remove->setEnabled(false);
+    ui->button_edit->setEnabled(false);
     ui->lineEdit_search->setText("");
 }
 
@@ -256,6 +259,7 @@ void MainWindow::on_button_add_connections_clicked()
 void MainWindow::on_table_current_view_clicked()
 {
     ui->button_remove->setEnabled(true);
+    ui->button_edit->setEnabled(true);
 }
 
 void MainWindow::on_button_remove_clicked()
@@ -304,6 +308,7 @@ void MainWindow::on_button_remove_clicked()
         {
             displayAllScientists();
             ui->button_remove->setEnabled(false);
+            ui->button_edit->setEnabled(false);
         }
     }
     else if(currentView == 2)
@@ -331,6 +336,7 @@ void MainWindow::on_button_remove_clicked()
         {
             displayAllComputers();
             ui->button_remove->setEnabled(false);
+            ui->button_edit->setEnabled(false);
         }
     }
     else if(currentView == 3)
