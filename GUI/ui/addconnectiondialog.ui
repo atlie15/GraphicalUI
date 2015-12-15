@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>174</width>
-    <height>117</height>
+    <width>274</width>
+    <height>143</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,46 +22,68 @@
   <property name="windowTitle">
    <string>Scientist + Computer</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <property name="sizeConstraint">
-    <enum>QLayout::SetFixedSize</enum>
-   </property>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_scientist">
-     <property name="text">
-      <string>Scientist</string>
-     </property>
-    </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_scientist">
+       <property name="text">
+        <string>Scientist</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="combo_scientists"/>
+     </item>
+    </layout>
    </item>
-   <item row="2" column="1">
-    <widget class="QComboBox" name="combo_scientists"/>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_computer">
+       <property name="text">
+        <string>Computer</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="combo_computers"/>
+     </item>
+    </layout>
    </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_computer">
-     <property name="text">
-      <string>Computer</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QComboBox" name="combo_computers"/>
-   </item>
-   <item row="6" column="0">
-    <widget class="QPushButton" name="pushButton_confirm">
-     <property name="text">
-      <string>Confirm</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="pushButton_cancel">
-     <property name="text">
-      <string>Cancel</string>
-     </property>
-    </widget>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="pushButton_cancel">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons.qrc">
+         <normaloff>:/icons/icons/Remove.png</normaloff>:/icons/icons/Remove.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_confirm">
+       <property name="text">
+        <string>Confirm</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons.qrc">
+         <normaloff>:/icons/icons/check.png</normaloff>:/icons/icons/check.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

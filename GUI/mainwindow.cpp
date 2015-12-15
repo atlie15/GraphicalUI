@@ -4,6 +4,7 @@
 #include "addcomputerdialog.h"
 #include "addconnectiondialog.h"
 #include "QMessageBox"
+#include <QDebug>
 
 using namespace std;
 
@@ -118,13 +119,17 @@ void MainWindow::displayConnections(std::vector<Scientist> scientists)
     for(unsigned int row(0); row < scientists.size(); row++)
     {
         Scientist tempScientist = scientists.at(row);
-        vector<Computer*> computers = tempScientist.getComputers();
+        vector<Computer> tempComputers = scientistService.getComputersByScientists(tempScientist);
+        tempScientist.setComputers(tempComputers);
 
-        QString sName = QString::fromStdString(tempScientist.getName());
-        QString noCPU = QString::number(computers.size());
+        QTableWidgetItem itemName;
+        QTableWidgetItem itemCPU;
 
-        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(sName));
-        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(noCPU));
+        itemName.setData(Qt::DisplayRole, QString::fromStdString(tempScientist.getName()));
+        itemCPU.setData(Qt::DisplayRole, tempScientist.getComputers().size());
+
+        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(itemName));
+        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(itemCPU));
     }
 
     ui->table_current_view->setSortingEnabled(true);

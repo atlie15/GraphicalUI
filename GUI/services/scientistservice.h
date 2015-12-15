@@ -2,6 +2,7 @@
 #define SCIENTISTSERVICE_H
 
 #include "scientistrepository.h"
+#include "computer.h"
 
 /**
  * @brief The ScientistService acts as a middle layer between the UI and Data layers
@@ -20,6 +21,7 @@ public:
      */
     std::vector<Scientist> getAllScientists(std::string orderBy, bool orderAscending);
 
+
     /**
      * @brief searchForScientists fetches all scientists filtered on searchTerm
      * @param searchTerm Contains the input that the user wishes to filter on
@@ -34,6 +36,8 @@ public:
      */
     bool addScientist(Scientist scientist);
     bool removeScientist(Scientist scientist);
+
+    std::vector<Computer> getComputersByScientists(Scientist scientist);
 private:
     ScientistRepository scientistRepo;
 };

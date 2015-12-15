@@ -132,6 +132,11 @@ bool ScientistRepository::removeScientist(Scientist scientist)
     return true;
 }
 
+std::vector<Computer> ScientistRepository::getComputersByScientists(Scientist scientist)
+{
+    return queryComputersByScientist(scientist);
+}
+
 std::vector<Computer> ScientistRepository::queryComputersByScientist(Scientist scientist)
 {
     vector<Computer> computers;

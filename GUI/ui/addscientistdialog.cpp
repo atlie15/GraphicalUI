@@ -33,7 +33,7 @@ void addScientistDialog::on_Button_add_scientist_clicked()
     }
     if(yearBorn.isEmpty())
     {
-        ui->label_error_yearBorn->setText("<span style = 'color: red'>Year born cannot be empty </span>");
+        ui->label_error_yearBorn->setText("<span style = 'color: red'>Enter a valid year for Year Born</span>");
         isError = true;
     }
     if(yearDeath.isEmpty() && !(ui->checkBox_scientist_alive->isChecked()))
