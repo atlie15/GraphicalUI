@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/icons">
         <file>icons/Nerd.png</file>
+        <file>icons/Add.png</file>
+        <file>icons/Remove.png</file>
+        <file>icons/view.png</file>
     </qresource>
 </RCC>
