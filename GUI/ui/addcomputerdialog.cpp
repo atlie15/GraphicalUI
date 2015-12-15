@@ -32,6 +32,16 @@ void addComputerDialog::on_pushButton_add_computer_clicked()
         ui->label_computer_yearBuilt_error->setText("<span style = 'color: red'>Please enter year</span>");
         isError = true;
     }
+
+    int wasBuilt = built.toInt();
+
+    if(wasBuilt < 0 || wasBuilt > 2015)
+    {
+        ui->label_computer_yearBuilt_error->setText("<span style = 'color: red'>Invalid year</span>");
+        isError = true;
+    }
+
+
     if(isError)
         return;
 

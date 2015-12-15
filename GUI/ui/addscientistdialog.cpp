@@ -33,9 +33,23 @@ void addScientistDialog::on_Button_add_scientist_clicked()
         ui->label_error_yearBorn->setText("<span style = 'color: red'>Year born cannot be empty </span>");
         isError = true;
     }
-    if(yearDeath.isEmpty() && ui->checkBox_scientist_alive->isChecked())
+    if(yearDeath.isEmpty() && !(ui->checkBox_scientist_alive->isChecked()))
     {
         ui->label_scientist_yearDeath_error->setText("<span style = 'color: red'>Please enter a year</span>");
+        isError = true;
+    }
+
+    int yb = yearBorn.toInt();
+    int yd = yearDeath.toInt();
+
+    if(yb <= 0 || yb > 2015 )
+    {
+        ui->label_error_yearBorn->setText("<span style = 'color: red'>Invalid year</span>");
+        isError = true;
+    }
+    if(((yd <= 0 || yd > 2015) || (yd <= yb)) && !(ui->checkBox_scientist_alive->isChecked()))
+    {
+        ui->label_scientist_yearDeath_error->setText("<span style = 'color: red'>Invalid year</span>");
         isError = true;
     }
 
@@ -69,7 +83,10 @@ void addScientistDialog::on_Button_add_scientist_clicked()
 void addScientistDialog::on_checkBox_scientist_alive_toggled(bool checked)
 {
     if(checked)
-        ui->lineEdit_scientist_yearDeath->setEnabled(false);
+    {
+       ui->lineEdit_scientist_yearDeath->setEnabled(false);
+       ui->lineEdit_scientist_yearDeath->setText("");
+    }
     else
         ui->lineEdit_scientist_yearDeath->setEnabled(true);
 }
