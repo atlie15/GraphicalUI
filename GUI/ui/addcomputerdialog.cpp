@@ -17,6 +17,9 @@ addComputerDialog::~addComputerDialog()
 
 void addComputerDialog::on_pushButton_add_computer_clicked()
 {
+    ui->label_computer_name_error->setText("");
+    ui->label_computer_yearBuilt_error->setText("");
+
     QString name = ui->lineEdit_computer_name->text();
     computerType type;
     QString built = ui->lineEdit_computer_year_built->text();

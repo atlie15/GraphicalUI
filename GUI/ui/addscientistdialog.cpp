@@ -16,6 +16,9 @@ addScientistDialog::~addScientistDialog()
 
 void addScientistDialog::on_Button_add_scientist_clicked()
 {
+    ui->label_error_yearBorn->setText("");
+    ui->label_scientist_yearDeath_error->setText("");
+    ui->label_error_scientist_name->setText("");
     QString name = ui->lineEdit_scientist_name->text();
     sexType sex;
     QString yearBorn = ui->lineEdit_scientist_yearBorn->text();
