@@ -253,61 +253,67 @@ void MainWindow::on_button_remove_clicked()
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Remove", "Are you sure you want to remove: " + name
                                   + " from database?", QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes)
+    if (reply == QMessageBox::No)
     {
-        if(currentView == 1)
+        return;
+    }
+
+    if(currentView == 1)
+    {
+        Scientist currentlySelectedScientist;
+
+        int row = ui->table_current_view->currentIndex().row();
+
+        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+
+        for (unsigned int i(0); i < currentlyDissplayedScientists.size(); i++)
         {
-            Scientist currentlySelectedScientist;
+            int tempID = currentlyDissplayedScientists.at(i).getId();
 
-            int row = ui->table_current_view->currentIndex().row();
-
-            int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
-
-            for (unsigned int i(0); i < currentlyDissplayedScientists.size(); i++)
+            if(tempID == id)
             {
-                int tempID = currentlyDissplayedScientists.at(i).getId();
-
-                if(tempID == id)
-                {
-                    currentlySelectedScientist = currentlyDissplayedScientists.at(i);
-                    break;
-                }
-            }
-
-            bool success = scientistService.removeScientist(currentlySelectedScientist);
-
-            if(success)
-            {
-                displayAllScientists();
-                ui->button_remove->setEnabled(false);
+                currentlySelectedScientist = currentlyDissplayedScientists.at(i);
+                break;
             }
         }
-        if(currentView == 2)
+
+        bool success = scientistService.removeScientist(currentlySelectedScientist);
+
+        if(success)
         {
-            Computer currentlySelectedComputer;
+            displayAllScientists();
+            ui->button_remove->setEnabled(false);
+        }
+    }
+    else if(currentView == 2)
+    {
+        Computer currentlySelectedComputer;
 
-            int row = ui->table_current_view->currentIndex().row();
+        int row = ui->table_current_view->currentIndex().row();
 
-            int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
 
-            for (unsigned int i(0); i < currentlyDissplayedComputers.size(); i++)
+        for (unsigned int i(0); i < currentlyDissplayedComputers.size(); i++)
+        {
+            int tempID = currentlyDissplayedComputers.at(i).getId();
+
+            if(tempID == id)
             {
-                int tempID = currentlyDissplayedComputers.at(i).getId();
-
-                if(tempID == id)
-                {
-                    currentlySelectedComputer = currentlyDissplayedComputers.at(i);
-                    break;
-                }
-            }
-
-            bool success = computerService.removeComputer(currentlySelectedComputer);
-
-            if(success)
-            {
-                displayAllComputers();
-                ui->button_remove->setEnabled(false);
+                currentlySelectedComputer = currentlyDissplayedComputers.at(i);
+                break;
             }
         }
+
+        bool success = computerService.removeComputer(currentlySelectedComputer);
+
+        if(success)
+        {
+            displayAllComputers();
+            ui->button_remove->setEnabled(false);
+        }
+    }
+    else if(currentView == 3)
+    {
+        return;
     }
 }
