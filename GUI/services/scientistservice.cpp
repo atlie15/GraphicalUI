@@ -28,3 +28,8 @@ bool ScientistService::removeScientist(Scientist scientist)
 {
     return scientistRepo.removeScientist(scientist);
 }
+
+std::vector<Computer> ScientistService::getComputersByScientists(Scientist scientist)
+{
+    return scientistRepo.getComputersByScientists(scientist);
+}
