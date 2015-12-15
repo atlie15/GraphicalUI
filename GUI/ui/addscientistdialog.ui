@@ -127,6 +127,10 @@
      <property name="text">
       <string>Add scientist</string>
      </property>
+     <property name="icon">
+      <iconset resource="../icons.qrc">
+       <normaloff>:/icons/icons/check.png</normaloff>:/icons/icons/check.png</iconset>
+     </property>
     </widget>
    </item>
   </layout>
@@ -134,6 +138,8 @@
  <tabstops>
   <tabstop>lineEdit_scientist_yearDeath</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -76,3 +76,8 @@ void addComputerDialog::on_radioButton_computer_yes_toggled(bool checked)
     else
         ui->lineEdit_computer_year_built->setEnabled(false);
 }
+
+void addComputerDialog::on_pushButton_cancel_clicked()
+{
+    this->done(0);
+}
