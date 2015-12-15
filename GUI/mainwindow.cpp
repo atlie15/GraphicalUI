@@ -57,6 +57,7 @@ void MainWindow::displayAllConnections()
 void MainWindow::displayComputers(std::vector<Computer> computers)
 {
     ui->table_current_view->clear();
+    ui->table_current_view->setSortingEnabled(false);
 
     ui->table_current_view->setColumnCount(4);
     ui->table_current_view->setColumnWidth(0, 30);
@@ -91,12 +92,15 @@ void MainWindow::displayComputers(std::vector<Computer> computers)
         ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearBuilt));
     }
 
+    ui->table_current_view->setSortingEnabled(true);
+
     currentlyDissplayedComputers = computers;
 }
 
 void MainWindow::displayConnections(std::vector<Scientist> scientists)
 {
     ui->table_current_view->clear();
+    ui->table_current_view->setSortingEnabled(false);
 
     ui->table_current_view->setColumnCount(2);
     for(unsigned int i(0); i < 2; i++)
@@ -117,11 +121,14 @@ void MainWindow::displayConnections(std::vector<Scientist> scientists)
         ui->table_current_view->setItem(row, 0, new QTableWidgetItem(sName));
         ui->table_current_view->setItem(row, 1, new QTableWidgetItem(noCPU));
     }
+
+    ui->table_current_view->setSortingEnabled(true);
 }
 
 void MainWindow::displayScientists(std::vector<Scientist> scientists)
 {
     ui->table_current_view->clear();
+    ui->table_current_view->setSortingEnabled(false);
 
     ui->table_current_view->setColumnCount(5);
     ui->table_current_view->setColumnWidth(0, 30);
@@ -163,6 +170,7 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
         ui->table_current_view->setItem(row, 4, new QTableWidgetItem(yearDied));
     }
 
+    ui->table_current_view->setSortingEnabled(true);
     currentlyDissplayedScientists = scientists;
 }
 
@@ -234,7 +242,16 @@ void MainWindow::on_table_current_view_clicked()
 void MainWindow::on_button_remove_clicked()
 {
     int row = ui->table_current_view->currentIndex().row();
-    QString name = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,1)).toString();
+
+    QString name;
+
+    if(currentView == 1 || currentView == 2)
+        name = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,1)).toString();
+    else
+        name = "Connection between "
+                + ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toString()
+                + " and " + ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,1)).toString();
+
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Remove", "Are you sure you want to remove: " + name
                                   + " from database?", QMessageBox::Yes|QMessageBox::No);
