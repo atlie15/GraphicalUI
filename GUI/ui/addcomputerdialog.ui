@@ -98,7 +98,10 @@
       <item>
        <widget class="QLineEdit" name="lineEdit_computer_year_built">
         <property name="enabled">
-         <bool>true</bool>
+         <bool>false</bool>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
