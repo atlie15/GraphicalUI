@@ -235,31 +235,31 @@ void MainWindow::on_button_remove_clicked()
             ui->button_remove->setEnabled(false);
         }
     }
-//    if(currentView == 2)
-//    {
-//        Computer currentlySelectedComputer;
+    if(currentView == 2)
+    {
+        Computer currentlySelectedComputer;
 
-//        int row = ui->table_current_view->currentIndex().row();
+        int row = ui->table_current_view->currentIndex().row();
 
-//        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
 
-//        for (unsigned int i(0); i < currentlyDisplayedComputers.size(); i++)
-//        {
-//            int tempID = currentlyDisplayedComputers.at(i).getId();
+        for (unsigned int i(0); i < currentlyDissplayedComputers.size(); i++)
+        {
+            int tempID = currentlyDissplayedComputers.at(i).getId();
 
-//            if(tempID == id)
-//            {
-//                currentlySelectedComputer = currentlyDissplayedComputers.at(i);
-//                break;
-//            }
-//        }
+            if(tempID == id)
+            {
+                currentlySelectedComputer = currentlyDissplayedComputers.at(i);
+                break;
+            }
+        }
 
-//        bool success = computerService.removeComputer(currentlySelectedComputer);
+        bool success = computerService.removeComputer(currentlySelectedComputer);
 
-//        if(success)
-//        {
-//            displayAllComputers();
-//            ui->button_remove->setEnabled(false);
-//        }
-//    }
+        if(success)
+        {
+            displayAllComputers();
+            ui->button_remove->setEnabled(false);
+        }
+    }
 }
