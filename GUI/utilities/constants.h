@@ -31,7 +31,7 @@ namespace constants {
     const std::string SORT_COMPUTER_YEAR_BUILT_DESCENDING = "built-desc";
 
     const std::string DATABASE_TYPE = "QSQLITE";
-    const std::string DATABASE_NAME = "database.sqlite";
+    const std::string DATABASE_NAME = "../GUI/database.sqlite";
 }
 
 #endif // CONSTANTS_H
