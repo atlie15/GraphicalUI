@@ -72,24 +72,26 @@ void MainWindow::displayComputers(std::vector<Computer> computers)
     {
         Computer tempComputer = computers.at(row);
 
-        int id = tempComputer.getId();
         QTableWidgetItem itemID;
-        itemID.setData(Qt::DisplayRole, id);
+        QTableWidgetItem itemName;
+        QTableWidgetItem itemType;
+        QTableWidgetItem itemYearBuilt;
 
-        QString name = QString::fromStdString(tempComputer.getName());
+        itemID.setData(Qt::DisplayRole, tempComputer.getId());
 
-        QString type = QString::fromStdString(tempComputer.getTypeName());
+        itemName.setData(Qt::DisplayRole, QString::fromStdString(tempComputer.getName()));
 
-        QString yearBuilt;
+        itemType.setData(Qt::DisplayRole, QString::fromStdString(tempComputer.getTypeName()));
+
         if(tempComputer.getYearBuilt() == 13337)
-            yearBuilt = "Not built";
+            itemYearBuilt.setData(Qt::DisplayRole, "Not built");
         else
-            yearBuilt = QString::number(tempComputer.getYearBuilt());
+            itemYearBuilt.setData(Qt::DisplayRole, QString::number(tempComputer.getYearBuilt()));
 
         ui->table_current_view->setItem(row, 0, new QTableWidgetItem(itemID));
-        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(name));
-        ui->table_current_view->setItem(row, 2, new QTableWidgetItem(type));
-        ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearBuilt));
+        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(itemName));
+        ui->table_current_view->setItem(row, 2, new QTableWidgetItem(itemType));
+        ui->table_current_view->setItem(row, 3, new QTableWidgetItem(itemYearBuilt));
     }
 
     ui->table_current_view->setSortingEnabled(true);
@@ -143,31 +145,33 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
     {
         Scientist tempScientist = scientists.at(row);
 
-        int id = tempScientist.getId();
         QTableWidgetItem itemID;
-        itemID.setData(Qt::DisplayRole, id);
+        QTableWidgetItem itemName;
+        QTableWidgetItem itemSex;
+        QTableWidgetItem itemYearBorn;
+        QTableWidgetItem itemYearDied;
 
-        QString name = QString::fromStdString(tempScientist.getName());
+        itemID.setData(Qt::DisplayRole, tempScientist.getId());
 
-        QString sex;
+        itemName.setData(Qt::DisplayRole, QString::fromStdString(tempScientist.getName()));
+
         if(tempScientist.getSex())
-            sex = "Male";
+            itemSex.setData(Qt::DisplayRole, "Male");
         else
-            sex = "Female";
+            itemSex.setData(Qt::DisplayRole, "Female");
 
-        QString yearBorn = QString::number(tempScientist.getYearBorn());
-        QString yearDied;
+        itemYearBorn.setData(Qt::DisplayRole, tempScientist.getYearBorn());
+
         if(tempScientist.getYearDied() == 13337)
-            yearDied = "Alive";
+            itemYearDied.setData(Qt::DisplayRole, "Alive");
         else
-            yearDied = QString::number(tempScientist.getYearDied());
-
+            itemYearDied.setData(Qt::DisplayRole, tempScientist.getYearDied());
 
         ui->table_current_view->setItem(row, 0, new QTableWidgetItem(itemID));
-        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(name));
-        ui->table_current_view->setItem(row, 2, new QTableWidgetItem(sex));
-        ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearBorn));
-        ui->table_current_view->setItem(row, 4, new QTableWidgetItem(yearDied));
+        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(itemName));
+        ui->table_current_view->setItem(row, 2, new QTableWidgetItem(itemSex));
+        ui->table_current_view->setItem(row, 3, new QTableWidgetItem(itemYearBorn));
+        ui->table_current_view->setItem(row, 4, new QTableWidgetItem(itemYearDied));
     }
 
     ui->table_current_view->setSortingEnabled(true);

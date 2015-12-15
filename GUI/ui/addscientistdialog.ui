@@ -118,7 +118,7 @@
    <item>
     <widget class="QLineEdit" name="lineEdit_scientist_yearDeath">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
    </item>
