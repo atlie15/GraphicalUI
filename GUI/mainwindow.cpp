@@ -155,7 +155,8 @@ void MainWindow::on_button_add_scientists_clicked()
 {
     addScientistDialog addScientist;
 
-    addScientist.exec();
+    int addScientistReturnValue = addScientist.exec();
+
 }
 
 void MainWindow::on_button_add_computers_clicked()
