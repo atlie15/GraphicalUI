@@ -325,7 +325,7 @@ void MainWindow::on_button_remove_clicked()
     }
 }
 
-void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
+void MainWindow::on_lineEdit_search_textChanged()
 {
     string userInput = ui->lineEdit_search->text().toStdString();
 

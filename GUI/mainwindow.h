@@ -35,7 +35,7 @@ private slots:
 
     void on_button_remove_clicked();
 
-    void on_lineEdit_search_textChanged(const QString &arg1);
+    void on_lineEdit_search_textChanged();
 
 private:
     void displayAllScientists();
