@@ -31,7 +31,7 @@ private slots:
 
     void on_button_add_connections_clicked();
 
-    void on_table_current_view_clicked(const QModelIndex &index);
+    void on_table_current_view_clicked();
 
     void on_button_remove_clicked();
 

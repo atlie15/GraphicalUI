@@ -58,7 +58,8 @@ void MainWindow::displayComputers(std::vector<Computer> computers)
     ui->table_current_view->clear();
 
     ui->table_current_view->setColumnCount(4);
-    for(unsigned int i(0); i < 4; i++)
+    ui->table_current_view->setColumnWidth(0, 30);
+    for(unsigned int i(1); i < 4; i++)
         ui->table_current_view->setColumnWidth(i, 100);
 
     ui->table_current_view->setHorizontalHeaderLabels(QStringList() << "ID" << "Name" << "Type" << "Year Built");
@@ -69,7 +70,9 @@ void MainWindow::displayComputers(std::vector<Computer> computers)
     {
         Computer tempComputer = computers.at(row);
 
-        QString id = QString::number(tempComputer.getId());
+        int id = tempComputer.getId();
+        QTableWidgetItem itemID;
+        itemID.setData(Qt::DisplayRole, id);
 
         QString name = QString::fromStdString(tempComputer.getName());
 
@@ -81,8 +84,7 @@ void MainWindow::displayComputers(std::vector<Computer> computers)
         else
             yearBuilt = QString::number(tempComputer.getYearBuilt());
 
-
-        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(id));
+        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(itemID));
         ui->table_current_view->setItem(row, 1, new QTableWidgetItem(name));
         ui->table_current_view->setItem(row, 2, new QTableWidgetItem(type));
         ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearBuilt));
@@ -121,7 +123,9 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
     ui->table_current_view->clear();
 
     ui->table_current_view->setColumnCount(5);
-    for(unsigned int i(0); i < 5; i++)
+    ui->table_current_view->setColumnWidth(0, 30);
+
+    for(unsigned int i(1); i < 5; i++)
         ui->table_current_view->setColumnWidth(i, 100);
 
     ui->table_current_view->setHorizontalHeaderLabels(QStringList() << "ID" << "Name" << "Gender" << "Year Born" << "Year Died");
@@ -131,7 +135,9 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
     {
         Scientist tempScientist = scientists.at(row);
 
-        QString id = QString::number(tempScientist.getId());
+        int id = tempScientist.getId();
+        QTableWidgetItem itemID;
+        itemID.setData(Qt::DisplayRole, id);
 
         QString name = QString::fromStdString(tempScientist.getName());
 
@@ -149,7 +155,7 @@ void MainWindow::displayScientists(std::vector<Scientist> scientists)
             yearDied = QString::number(tempScientist.getYearDied());
 
 
-        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(id));
+        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(itemID));
         ui->table_current_view->setItem(row, 1, new QTableWidgetItem(name));
         ui->table_current_view->setItem(row, 2, new QTableWidgetItem(sex));
         ui->table_current_view->setItem(row, 3, new QTableWidgetItem(yearBorn));
@@ -178,7 +184,7 @@ void MainWindow::on_button_add_scientists_clicked()
 {
     addScientistDialog addScientist;
 
-    int addScientistReturnValue = addScientist.exec();
+    addScientist.exec();
 
     displayAllScientists();
 }
@@ -201,7 +207,7 @@ void MainWindow::on_button_add_connections_clicked()
     displayAllConnections();
 }
 
-void MainWindow::on_table_current_view_clicked(const QModelIndex &index)
+void MainWindow::on_table_current_view_clicked()
 {
     ui->button_remove->setEnabled(true);
 }
