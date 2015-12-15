@@ -189,14 +189,14 @@ void MainWindow::on_button_add_scientists_clicked()
 
     displayAllScientists();
 
+    qDebug() << addScientistReturn;
     if(addScientistReturn == 0)
-    {
-        ui->statusBar->showMessage("Successfully added Scientist", 5000);
-    }
+        ui->statusBar->showMessage("Add scientist closed", 5000);
+    else if(addScientistReturn == 1)
+        ui->statusBar->showMessage("Successfully added a Scientist", 5000);
     else
-    {
         ui->statusBar->showMessage("An error has occurred, please try again", 5000);
-    }
+
 }
 
 void MainWindow::on_button_add_computers_clicked()
@@ -208,13 +208,11 @@ void MainWindow::on_button_add_computers_clicked()
     displayAllComputers();
 
     if(addComputerReturn == 0)
-    {
-        ui->statusBar->showMessage("Successfully added Computer", 5000);
-    }
+        ui->statusBar->showMessage("Add computer closed", 5000);
+    else if(addComputerReturn == 1)
+        ui->statusBar->showMessage("Successfully added a Computer", 5000);
     else
-    {
         ui->statusBar->showMessage("An error has occurred, please try again", 5000);
-    }
 }
 
 void MainWindow::on_button_add_connections_clicked()

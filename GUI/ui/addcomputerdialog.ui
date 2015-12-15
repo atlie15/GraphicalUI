@@ -22,11 +22,22 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_computer_name">
-     <property name="text">
-      <string>Name</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_computer_name">
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_computer_name_error">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QLineEdit" name="lineEdit_computer_name"/>
@@ -63,6 +74,9 @@
         <property name="text">
          <string>Other</string>
         </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>
@@ -79,6 +93,9 @@
         <property name="text">
          <string>Yes</string>
         </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -86,14 +103,28 @@
         <property name="text">
          <string>No</string>
         </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_computer_year_built">
-        <property name="text">
-         <string>If yes, what year was it built?</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_computer_year_built">
+          <property name="text">
+           <string>If yes, what year was it built?</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_computer_yearBuilt_error">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QLineEdit" name="lineEdit_computer_year_built">

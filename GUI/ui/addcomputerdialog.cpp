@@ -21,6 +21,19 @@ void addComputerDialog::on_pushButton_add_computer_clicked()
     computerType type;
     QString built = ui->lineEdit_computer_year_built->text();
     bool success = false;
+    bool isError = false;
+    if(name.isEmpty())
+    {
+        ui->label_computer_name_error->setText("<span style = 'color: red'>Name cannot be empty </span>");
+        isError = true;
+    }
+    if(built.isEmpty() && ui->radioButton_computer_yes->isChecked())
+    {
+        ui->label_computer_yearBuilt_error->setText("<span style = 'color: red'>Please enter year</span>");
+        isError = true;
+    }
+    if(isError)
+        return;
 
     if(ui->radioButton_computer_type_electronic->isChecked())
     {
@@ -48,7 +61,7 @@ void addComputerDialog::on_pushButton_add_computer_clicked()
 
     if(success)
     {
-        this->done(0);
+        this->done(1);
     }
     else
     {

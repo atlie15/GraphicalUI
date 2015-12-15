@@ -21,17 +21,27 @@ void addScientistDialog::on_Button_add_scientist_clicked()
     QString yearBorn = ui->lineEdit_scientist_yearBorn->text();
     QString yearDeath = ui->lineEdit_scientist_yearDeath->text();
     bool success = false;
+    bool isError = false;
 
     if(name.isEmpty())
     {
         ui->label_error_scientist_name->setText("<span style = 'color: red'>Name cannot be empty </span>");
-        return;
+        isError = true;
     }
     if(yearBorn.isEmpty())
     {
         ui->label_error_yearBorn->setText("<span style = 'color: red'>Year born cannot be empty </span>");
-        return;
+        isError = true;
     }
+    if(yearDeath.isEmpty() && ui->checkBox_scientist_alive->isChecked())
+    {
+        ui->label_scientist_yearDeath_error->setText("<span style = 'color: red'>Please enter a year</span>");
+        isError = true;
+    }
+
+    if(isError)
+        return;
+
     if(ui->radioButton_scientist_female->isChecked())
     {
         sex = female;
@@ -48,7 +58,7 @@ void addScientistDialog::on_Button_add_scientist_clicked()
 
     if(success)
     {
-        this->done(0);
+        this->done(1);
     }
     else
     {
@@ -59,8 +69,8 @@ void addScientistDialog::on_Button_add_scientist_clicked()
 void addScientistDialog::on_checkBox_scientist_alive_toggled(bool checked)
 {
     if(checked)
-        ui->lineEdit_scientist_yearDeath->setReadOnly(true);
+        ui->lineEdit_scientist_yearDeath->setEnabled(true);
     else
-        ui->lineEdit_scientist_yearDeath->setReadOnly(false);
+        ui->lineEdit_scientist_yearDeath->setEnabled(false);
 }
 
