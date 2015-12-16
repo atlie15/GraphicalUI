@@ -506,14 +506,19 @@ void MainWindow::on_button_edit_clicked()
 
         editConnection.prepare(computers, currentScientist, cPos);
 
-        bool success = editConnection.exec();
+        int success = editConnection.exec();
 
-        if(success)
+        if(success == 1)
         {
+            ui->statusBar->showMessage("Successfully edited a connection", 5000);
+
             displayAllConnections();
             ui->button_remove->setEnabled(false);
             ui->button_edit->setEnabled(false);
         }
-
+        else if(success == -1)
+            ui->statusBar->showMessage("An error has occurred, try deleting the connection and creating another", 10000);
+        else if(success == 0)
+            ui->statusBar->showMessage("Edit connection closed", 5000);
     }
 }

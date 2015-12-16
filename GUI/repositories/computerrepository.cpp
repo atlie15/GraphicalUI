@@ -119,6 +119,15 @@ bool ComputerRepository::removeComputer(Computer computer)
         return false;
     }
 
+    stringstream sqlQuery2;
+    sqlQuery2 << "DELETE FROM ScientistComputerConnections "
+                "WHERE computerId='" << computer.getId() << "'";
+
+    if (!query.exec(QString::fromStdString(sqlQuery2.str())))
+    {
+        return false;
+    }
+
     db.close();
 
     return true;

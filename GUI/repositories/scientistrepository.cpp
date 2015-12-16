@@ -127,6 +127,15 @@ bool ScientistRepository::removeScientist(Scientist scientist)
         return false;
     }
 
+    stringstream sqlQuery2;
+    sqlQuery2 << "DELETE FROM ScientistComputerConnections "
+                "WHERE scientistId='" << scientist.getId() << "'";
+
+    if (!query.exec(QString::fromStdString(sqlQuery2.str())))
+    {
+        return false;
+    }
+
     db.close();
 
     return true;
