@@ -3,6 +3,9 @@
 #include "addscientistdialog.h"
 #include "addcomputerdialog.h"
 #include "addconnectiondialog.h"
+#include "editscientistdialog.h"
+#include "editcomputerdialog.h"
+#include "editconnectiondialog.h"
 #include "QMessageBox"
 #include <QDebug>
 
@@ -50,9 +53,7 @@ void MainWindow::displayAllComputers()
 
 void MainWindow::displayAllConnections()
 {
-    vector<Scientist> scientists = scientistService.getAllScientists("name", true);
-
-    displayConnections(scientists);
+    displayConnections();
 
     currentView = 3;
 
@@ -106,7 +107,7 @@ void MainWindow::displayComputers(std::vector<Computer> computers)
     currentlyDissplayedComputers = computers;
 }
 
-void MainWindow::displayConnections(std::vector<Scientist> scientists)
+void MainWindow::displayConnections()
 {
     ui->table_current_view->clear();
     ui->table_current_view->setSortingEnabled(false);
@@ -117,22 +118,32 @@ void MainWindow::displayConnections(std::vector<Scientist> scientists)
 
     ui->table_current_view->setHorizontalHeaderLabels(QStringList() << "Scientist Name" << "Computers");
 
-    ui->table_current_view->setRowCount(scientists.size());
+    vector<int> links = linkService.getLink();
+    vector<Computer> allComputers = computerService.getAllComputers("name", true);
+    vector<Scientist> allScientists = scientistService.getAllScientists("name", true);
 
-    for(unsigned int row(0); row < scientists.size(); row++)
+    ui->table_current_view->setRowCount(links.size()/2);
+
+    int row = 0;
+
+    for(unsigned int i(0); i < links.size(); i+=2)
     {
-        Scientist tempScientist = scientists.at(row);
-        vector<Computer> tempComputers = scientistService.getComputersByScientists(tempScientist);
-        tempScientist.setComputers(tempComputers);
+        for(unsigned int j(0); j < allScientists.size(); j++)
+        {
+            unsigned int k = links.at(i);
 
-        QTableWidgetItem itemName;
-        QTableWidgetItem itemCPU;
+            if(k == allScientists.at(j).getId())
+                ui->table_current_view->setItem(row,0, new QTableWidgetItem(QString::fromStdString(allScientists.at(j).getName())));
+        }
+        for(unsigned int j(0); j < allComputers.size(); j++)
+        {
+            unsigned int k = links.at(i+1);
 
-        itemName.setData(Qt::DisplayRole, QString::fromStdString(tempScientist.getName()));
-        itemCPU.setData(Qt::DisplayRole, tempScientist.getComputers().size());
+            if(k == allComputers.at(j).getId())
+                ui->table_current_view->setItem(row,1, new QTableWidgetItem(QString::fromStdString(allComputers.at(j).getName())));
+        }
 
-        ui->table_current_view->setItem(row, 0, new QTableWidgetItem(itemName));
-        ui->table_current_view->setItem(row, 1, new QTableWidgetItem(itemCPU));
+        row++;
     }
 
     ui->table_current_view->setSortingEnabled(true);
@@ -341,7 +352,39 @@ void MainWindow::on_button_remove_clicked()
     }
     else if(currentView == 3)
     {
-        return;
+        int row = ui->table_current_view->currentIndex().row();
+        string sName = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toString().toStdString();
+        string cName = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,1)).toString().toStdString();
+
+        vector<Scientist> scientists = scientistService.getAllScientists("name", true);
+        vector<Computer> computers = computerService.getAllComputers("name", true);
+
+        int sID(0);
+        int cID(0);
+
+        for(unsigned int i(0); i < scientists.size(); i++)
+        {
+            if(sName == scientists.at(i).getName())
+            {
+                sID = scientists.at(i).getId();
+                break;
+            }
+        }
+        for(unsigned int i(0); i < computers.size(); i++)
+        {
+            if(cName == computers.at(i).getName())
+            {
+                cID = computers.at(i).getId();
+                break;
+            }
+        }
+
+        if(linkService.removeLink(sID, cID))
+        {
+            displayAllConnections();
+            ui->button_remove->setEnabled(false);
+            ui->button_edit->setEnabled(false);
+        }
     }
 }
 
@@ -361,3 +404,116 @@ void MainWindow::on_lineEdit_search_textChanged()
     }
 }
 
+
+void MainWindow::on_button_edit_clicked()
+{
+    if(currentView == 1)
+    {
+        Scientist currentlySelectedScientist;
+
+        int row = ui->table_current_view->currentIndex().row();
+
+        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+
+        for (unsigned int i(0); i < currentlyDissplayedScientists.size(); i++)
+        {
+            int tempID = currentlyDissplayedScientists.at(i).getId();
+
+            if(tempID == id)
+            {
+                currentlySelectedScientist = currentlyDissplayedScientists.at(i);
+                break;
+            }
+        }
+
+        editScientistDialog editScientist;
+
+        editScientist.prepare(currentlySelectedScientist);
+
+        bool success = editScientist.exec();
+
+        if(success)
+        {
+            displayAllScientists();
+            ui->button_remove->setEnabled(false);
+            ui->button_edit->setEnabled(false);
+        }
+    }
+    else if(currentView == 2)
+    {
+        Computer currentlySelectedComputer;
+
+        int row = ui->table_current_view->currentIndex().row();
+
+        int id = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toInt();
+
+        for (unsigned int i(0); i < currentlyDissplayedComputers.size(); i++)
+        {
+            int tempID = currentlyDissplayedComputers.at(i).getId();
+
+            if(tempID == id)
+            {
+                currentlySelectedComputer = currentlyDissplayedComputers.at(i);
+                break;
+            }
+        }
+
+        editComputerDialog editComputer;
+
+        editComputer.prepare(currentlySelectedComputer);
+
+        bool success = editComputer.exec();
+
+        if(success)
+        {
+            displayAllComputers();
+            ui->button_remove->setEnabled(false);
+            ui->button_edit->setEnabled(false);
+        }
+    }
+    else if(currentView == 3)
+    {
+        editConnectionDialog editConnection;
+
+        int row = ui->table_current_view->currentIndex().row();
+        string sName = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,0)).toString().toStdString();
+        string cName = ui->table_current_view->model()->data(ui->table_current_view->model()->index(row,1)).toString().toStdString();
+
+        vector<Scientist> scientists = scientistService.getAllScientists("name", true);
+        vector<Computer> computers = computerService.getAllComputers("name", true);
+
+        int sID(0);
+        int cPos(0);
+
+        for(unsigned int i(0); i < scientists.size(); i++)
+        {
+            if(sName == scientists.at(i).getName())
+            {
+                sID = i;
+                break;
+            }
+        }
+        for(unsigned int i(0); i < computers.size(); i++)
+        {
+            if(cName == computers.at(i).getName())
+            {
+                cPos = i;
+                break;
+            }
+        }
+
+        Scientist currentScientist = scientists.at(sID);
+
+        editConnection.prepare(computers, currentScientist, cPos);
+
+        bool success = editConnection.exec();
+
+        if(success)
+        {
+            displayAllConnections();
+            ui->button_remove->setEnabled(false);
+            ui->button_edit->setEnabled(false);
+        }
+
+    }
+}

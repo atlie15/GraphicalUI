@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Add Scientist</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../icons.qrc">
+    <normaloff>:/icons/icons/Add.png</normaloff>:/icons/icons/Add.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label_add_new_scientist">
@@ -104,6 +108,15 @@
        <property name="text">
         <string>Alive</string>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="shortcut">
+        <string>CapsLock, CapsLock</string>
+       </property>
       </widget>
      </item>
      <item>
@@ -124,6 +137,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QPushButton" name="pushButton_return_to_main_menu">
        <property name="focusPolicy">
@@ -136,6 +152,12 @@
         <iconset resource="../icons.qrc">
          <normaloff>:/icons/icons/Remove.png</normaloff>:/icons/icons/Remove.png</iconset>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item>
@@ -146,6 +168,12 @@
        <property name="icon">
         <iconset resource="../icons.qrc">
          <normaloff>:/icons/icons/check.png</normaloff>:/icons/icons/check.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
        </property>
        <property name="default">
         <bool>false</bool>

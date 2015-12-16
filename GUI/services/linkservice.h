@@ -19,6 +19,9 @@ public:
      * @return true if it was a success, false if it was a failure
      */
     bool addLink(std::string scientistId, std::string computerId);
+    bool editLink(std::string scientistId, std::string computerId);
+    bool removeLink(int scientistId, int computerId);
+    std::vector<int> getLink();
 private:
     LinkRepository linkRepo;
 };

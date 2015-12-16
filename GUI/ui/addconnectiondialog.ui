@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>274</width>
-    <height>143</height>
+    <width>310</width>
+    <height>180</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,23 @@
   <property name="windowTitle">
    <string>Scientist + Computer</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../icons.qrc">
+    <normaloff>:/icons/icons/Add.png</normaloff>:/icons/icons/Add.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="label_scientist">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
        <property name="text">
-        <string>Scientist</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Scientist&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -42,7 +52,7 @@
      <item>
       <widget class="QLabel" name="label_computer">
        <property name="text">
-        <string>Computer</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Computer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -53,6 +63,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QPushButton" name="pushButton_cancel">
        <property name="focusPolicy">
@@ -65,6 +78,12 @@
         <iconset resource="../icons.qrc">
          <normaloff>:/icons/icons/Remove.png</normaloff>:/icons/icons/Remove.png</iconset>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item>
@@ -75,6 +94,12 @@
        <property name="icon">
         <iconset resource="../icons.qrc">
          <normaloff>:/icons/icons/check.png</normaloff>:/icons/icons/check.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
        </property>
       </widget>
      </item>
