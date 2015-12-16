@@ -23,6 +23,8 @@ private slots:
 
     void on_pushButton_confirm_clicked();
 
+    void on_pushButton_cancel_clicked();
+
 private:
     Ui::editComputerDialog *ui;
     ComputerService computerService;

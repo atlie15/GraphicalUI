@@ -115,3 +115,8 @@ void editComputerDialog::on_pushButton_confirm_clicked()
         this->done(-1);
     }
 }
+
+void editComputerDialog::on_pushButton_cancel_clicked()
+{
+    this->done(0);
+}
