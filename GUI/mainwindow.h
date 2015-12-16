@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "computerservice.h"
 #include "scientistservice.h"
+#include "linkservice.h"
 #include <vector>
 
 namespace Ui {
@@ -37,6 +38,7 @@ private slots:
 
     void on_lineEdit_search_textChanged();
 
+    void on_button_edit_clicked();
 
 private:
     void displayAllScientists();
@@ -44,11 +46,12 @@ private:
     void displayAllConnections();
     void displayScientists(std::vector<Scientist> scientists);
     void displayComputers(std::vector<Computer> computers);
-    void displayConnections(std::vector<Scientist> scientists);
+    void displayConnections();
     Ui::MainWindow *ui;
     int currentView;
     ComputerService computerService;
     ScientistService scientistService;
+    LinkService linkService;
     std::vector<Scientist> currentlyDissplayedScientists;
     std::vector<Computer> currentlyDissplayedComputers;
 };

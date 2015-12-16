@@ -24,6 +24,7 @@ public:
     Scientist(std::string name, sexType sex, int yearBorn);
     Scientist(std::string name, sexType sex, int yearBorn, int yearDied);
     Scientist(unsigned int id, std::string name, sexType sex, int yearBorn, int yearDied);
+    Scientist(const Scientist& scientist);
 
     unsigned int getId();
     std::string getName() const;

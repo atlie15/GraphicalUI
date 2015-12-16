@@ -35,6 +35,7 @@ public:
      */
     bool addScientist(Scientist scientist);
     bool removeScientist(Scientist scientist);
+    bool editScientist(Scientist scientist);
     std::vector<Computer> getComputersByScientists(Scientist scientist);
 
 private:

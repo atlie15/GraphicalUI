@@ -122,7 +122,7 @@ bool ComputerRepository::removeComputer(Computer computer)
     db.close();
 
     return true;
-    }
+}
 
 std::vector<Scientist> ComputerRepository::queryScientistsByComputer(Computer computer)
 {
@@ -157,4 +157,33 @@ std::vector<Scientist> ComputerRepository::queryScientistsByComputer(Computer co
     }
 
     return scientists;
+}
+
+bool ComputerRepository::editComputer(Computer computer)
+{
+    db.open();
+
+    if (!db.isOpen())
+    {
+        return false;
+    }
+
+    QSqlQuery query(db);
+
+    stringstream sqlQuery;
+    sqlQuery << "UPDATE Computers "
+             << "SET name='" << computer.getName()
+             << "', type='" << computer.getType()
+             << "', yearBuilt='" << computer.getYearBuilt()
+             << "', wasBuilt='" << computer.wasBuilt()
+             << "' WHERE id='" << computer.getId() << "'";
+
+    if (!query.exec(QString::fromStdString(sqlQuery.str())))
+    {
+        return false;
+    }
+
+    db.close();
+
+    return true;
 }

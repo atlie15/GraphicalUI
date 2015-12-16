@@ -25,7 +25,10 @@ SOURCES += main.cpp\
     utilities/utils.cpp \
     ui/addscientistdialog.cpp \
     ui/addcomputerdialog.cpp \
-    ui/addconnectiondialog.cpp
+    ui/addconnectiondialog.cpp \
+    ui/editscientistdialog.cpp \
+    ui/editcomputerdialog.cpp \
+    ui/editconnectiondialog.cpp
 
 HEADERS  += mainwindow.h \
     models/computer.h \
@@ -40,12 +43,18 @@ HEADERS  += mainwindow.h \
     utilities/utils.h \
     ui/addscientistdialog.h \
     ui/addcomputerdialog.h \
-    ui/addconnectiondialog.h
+    ui/addconnectiondialog.h \
+    ui/editscientistdialog.h \
+    ui/editcomputerdialog.h \
+    ui/editconnectiondialog.h
 
 FORMS    += mainwindow.ui \
     ui/addscientistdialog.ui \
     ui/addcomputerdialog.ui \
-    ui/addconnectiondialog.ui
+    ui/addconnectiondialog.ui \
+    ui/editscientistdialog.ui \
+    ui/editcomputerdialog.ui \
+    ui/editconnectiondialog.ui
 
 INCLUDEPATH += models \
     repositories \

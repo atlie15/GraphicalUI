@@ -41,6 +41,21 @@ Scientist::Scientist(unsigned int id, std::string name, sexType sex, int yearBor
     this->yearDied = yearDied;
 }
 
+Scientist::Scientist(const Scientist& scientist)
+{
+    id = scientist.id;
+    name = scientist.name;
+    sex = scientist.sex;
+    yearBorn = scientist.yearBorn;
+    yearDied = scientist.yearDied;
+
+    for(unsigned int i(0); i < scientist.computers.size(); i++)
+    {
+        Computer* p = scientist.computers[i];
+        this->computers.push_back(new Computer(p->getId(),p->getName(),p->getType(),p->getYearBuilt()));
+    }
+}
+
 unsigned int Scientist::getId()
 {
     return id;

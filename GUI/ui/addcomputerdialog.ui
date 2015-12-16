@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Add Computer</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../icons.qrc">
+    <normaloff>:/icons/icons/Add.png</normaloff>:/icons/icons/Add.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label_computer_header">
@@ -138,6 +142,9 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <widget class="QPushButton" name="pushButton_cancel">
        <property name="focusPolicy">
@@ -150,6 +157,12 @@
         <iconset resource="../icons.qrc">
          <normaloff>:/icons/icons/Remove.png</normaloff>:/icons/icons/Remove.png</iconset>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item>
@@ -160,6 +173,12 @@
        <property name="icon">
         <iconset resource="../icons.qrc">
          <normaloff>:/icons/icons/check.png</normaloff>:/icons/icons/check.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
        </property>
       </widget>
      </item>
